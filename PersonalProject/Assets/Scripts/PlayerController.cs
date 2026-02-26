@@ -1,16 +1,27 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Vector2 inputVec;
+    private Rigidbody2D rb;
+    public float _speed;
+
+    private void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    public void Update()
+    {
+        inputVec.x = Input.GetAxis("Horizontal");
+        inputVec.y = Input.GetAxis("Vertical");
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void FixedUpdate()
     {
-        
+        Vector2 nextVec = inputVec.normalized * _speed * Time.fixedDeltaTime;
+        rb.MovePosition(rb.position + nextVec);
     }
 }
