@@ -5,7 +5,9 @@ using Random = UnityEngine.Random;
 public class Spawner : MonoBehaviour
 {
     public Transform[] spawnPoints;
+    public SpawnData[] spawnData;
     
+    private int level;
     float spawnTimer;
 
     private void Awake()
@@ -16,22 +18,27 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
         spawnTimer += Time.deltaTime;
-
-        if (spawnTimer >= 0.2f)
+        level = Mathf.FloorToInt(GameManager.instance.gameTime / 10f);
+        
+        if (spawnTimer >= (level == 0 ? 0.5f : 0.2f))
         {
             spawnTimer = 0;
             Spawn();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameManager.instance.poolManager.Get(1);
         }
     }
 
     private void Spawn()
     {
-        GameObject enemy = GameManager.instance.poolManager.Get(Random.Range(0, 2));
+        GameObject enemy = GameManager.instance.poolManager.Get(level);
         enemy.transform.position = spawnPoints[Random.Range(1, spawnPoints.Length)].position;
     }
+}
+
+[Serializable]
+public class SpawnData
+{
+    public float spawnTime;
+    public int spriteType;
+    public int health;
+    public float speed;
 }

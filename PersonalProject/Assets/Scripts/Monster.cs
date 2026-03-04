@@ -5,11 +5,15 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     public float Speed;
+    public float health;
+    public float maxHealth;
+    public RuntimeAnimatorController[] animatorController;
     public Rigidbody2D Target;
 
-    private bool isAlive = true;
+    private bool isAlive;
 
     private Rigidbody2D rb;
+    Animator anim;
     SpriteRenderer sr;
 
     private void Awake()
@@ -37,5 +41,15 @@ public class Monster : MonoBehaviour
     void OnEnable()
     {
         Target = GameManager.instance.player.GetComponent<Rigidbody2D>();
+        isAlive = true;
+        health = maxHealth;
+    }
+
+    public void Init(SpawnData data)
+    {
+        anim.runtimeAnimatorController = animatorController[data.spriteType];
+        Speed =  data.speed;
+        maxHealth = data.health;
+        health = data.health;
     }
 }
