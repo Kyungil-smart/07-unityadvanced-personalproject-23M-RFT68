@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer _sr;
     
     public Vector2 inputVec;
-    public float Speed;
+    [SerializeField] public float Speed;
 
     void Awake()
     {
@@ -23,8 +23,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 nextVec = inputVec.normalized * Speed * Time.fixedDeltaTime;
-        _rb.MovePosition(_rb.position + inputVec * Time.fixedDeltaTime);
-        
+        _rb.MovePosition(_rb.position + nextVec);
     }
 
     void LateUpdate()
