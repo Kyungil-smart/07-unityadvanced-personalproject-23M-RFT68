@@ -6,8 +6,6 @@ using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
-using UnityEngine;
-
 // 입력 처리 / 물리 판정 / 애니메이션 결정
 public class PlayerController : MonoBehaviour
 {
