@@ -19,6 +19,7 @@ public class Monster : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
     }
 

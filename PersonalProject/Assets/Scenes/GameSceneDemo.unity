@@ -9391,7 +9391,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PoolManager
   prefabs:
   - {fileID: 3750609390310009919, guid: 9d8618daf05c2774a925347e21c15588, type: 3}
-  - {fileID: 5794501223145729404, guid: 4ba8b17ca1d34634bb33f76b633e63b8, type: 3}
 --- !u!4 &1297996454
 Transform:
   m_ObjectHideFlags: 0
@@ -9401,7 +9400,7 @@ Transform:
   m_GameObject: {fileID: 1297996452}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.91693, y: 5.86466, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13957,6 +13956,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
   spawnPoints: []
+  spawnData:
+  - spawnTime: 0.7
+    spriteType: 0
+    health: 10
+    speed: 1.5
+  - spawnTime: 0.2
+    spriteType: 1
+    health: 15
+    speed: 2.4
 --- !u!1 &1548668570
 GameObject:
   m_ObjectHideFlags: 0
