@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Monster : MonoBehaviour
@@ -31,5 +32,10 @@ public class Monster : MonoBehaviour
     {
         if (!isAlive) return;
         sr.flipX = Target.position.x < rb.position.x;
+    }
+
+    void OnEnable()
+    {
+        Target = GameManager.instance.player.GetComponent<Rigidbody2D>();
     }
 }
