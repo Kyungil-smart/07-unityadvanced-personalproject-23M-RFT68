@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     public bool isLive;
     public float gameTime;
     public float maxGameTime = 2 * 10f;
-    [Header("# Player Info")]
+    [Header("# Player Info")] 
+    public int playerID;
     public float health;
     public float maxHealth = 100f;
     public int level;
@@ -21,7 +22,8 @@ public class GameManager : MonoBehaviour
     public PoolManager poolManager;
     public Player player;
     public LevelUp uiLevelUp;
-    public GameObject uiResult;
+    public Result uiResult;
+    public GameObject enemyCleaner;
 
     
     private void Awake()
@@ -29,11 +31,14 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    public void GameStart()
+    public void GameStart(int id)
     {
+        playerID = id;
         health = maxHealth;
-        uiLevelUp.Select(0);
-        isLive = true;
+        
+        player.gameObject.SetActive(true);
+        uiLevelUp.Select(playerID % 2);
+        Resume();
     }
 
     public void GameOver()
@@ -47,10 +52,28 @@ public class GameManager : MonoBehaviour
         
         yield return new WaitForSeconds(0.5f);
         
-        uiResult.SetActive(true);
+        uiResult.gameObject.SetActive(true);
+        uiResult.Lose();
         Stop();
     }
 
+    public void GameVictory()
+    {
+        StartCoroutine(GameVictoryCoroutine());
+    }
+
+    IEnumerator GameVictoryCoroutine()
+    {
+        isLive = false;
+        enemyCleaner.SetActive(true);
+        
+        yield return new WaitForSeconds(0.5f);
+        
+        uiResult.gameObject.SetActive(true);
+        uiResult.Win();
+        Stop();
+    }
+    
     public void GameRetry()
     {
         SceneManager.LoadScene(1);
@@ -65,11 +88,13 @@ public class GameManager : MonoBehaviour
         if (gameTime >= maxGameTime)
         {
             gameTime = maxGameTime;
+            GameVictory();
         }
     }
 
     public void GetExp()
     {
+        if (!isLive) return;
         exp++;
 
         if (exp == nextExp[Mathf.Min(level, nextExp.Length - 1)])

@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     private Animator _anim;
     private SpriteRenderer _sr;
 
+    public RuntimeAnimatorController[] animCon;
     public Hand[] hands;
     public Scanner scanner;
     public Vector2 inputVec;
@@ -23,6 +24,11 @@ public class Player : MonoBehaviour
         _anim = GetComponent<Animator>();
         scanner = GetComponent<Scanner>();
         hands = GetComponentsInChildren<Hand>(true);
+    }
+
+    private void OnEnable()
+    {
+        _anim.runtimeAnimatorController = animCon[GameManager.instance.playerID];
     }
 
     void FixedUpdate()
