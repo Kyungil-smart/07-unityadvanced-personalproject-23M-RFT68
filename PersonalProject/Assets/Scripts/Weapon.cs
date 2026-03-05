@@ -47,6 +47,7 @@ public class Weapon : MonoBehaviour
             Batch();
         }
 
+        _player.BroadcastMessage("ApplyGear",  SendMessageOptions.DontRequireReceiver);
     }
 
     public void Init(ItemData data)
@@ -75,14 +76,15 @@ public class Weapon : MonoBehaviour
         switch (id)
         {
             case 0:
-                speed = -150;
+                speed = 150;
                 Batch();
                 break;
             default:
-                speed = 0.3f;
+                speed = 0.4f;
                 break;
         }
 
+        _player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
 
     void Batch()
