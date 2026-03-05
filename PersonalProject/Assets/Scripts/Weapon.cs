@@ -10,18 +10,13 @@ public class Weapon : MonoBehaviour
     public float speed;
 
     private float _timer;
-
     private Player _player;
 
     private void Awake()
     {
-        _player = GetComponentInParent<Player>();
+        _player = GameManager.instance.player;
     }
-
-    void Start()
-    {
-        Init();
-    }
+    
 
     private void Update()
     {
@@ -54,8 +49,29 @@ public class Weapon : MonoBehaviour
 
     }
 
-    void Init()
+    public void Init(ItemData data)
     {
+        // Basic Set
+        name = "Weapon " + data.itemId;         // 무기를 생성
+        transform.parent = _player.transform;   // 플레이어 자식으로 생성
+        transform.localPosition = Vector3.zero; // 플레이어 기준점으로 위치 생성
+        
+        // Property Set
+        id = data.itemId;
+        damage = data.baseDamage;
+        count = data.baseCount;
+
+        for (int i = 0; i < GameManager.instance.poolManager.prefabs.Length; i++)
+        {
+            if (data.projectile == GameManager.instance.poolManager.prefabs[i])
+            {
+                prefabId = i;
+                break;
+            }
+        }
+
+
+
         switch (id)
         {
             case 0:
