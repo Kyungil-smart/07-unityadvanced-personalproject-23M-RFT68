@@ -31,6 +31,8 @@ public class Monster : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!GameManager.instance.isLive) return;
+        
         if (!isAlive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return;
 
         Vector2 dirVec = Target.position - rb.position;
@@ -41,6 +43,8 @@ public class Monster : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!GameManager.instance.isLive) return;
+        
         if (!isAlive) return;
         sr.flipX = Target.position.x < rb.position.x;
     }
