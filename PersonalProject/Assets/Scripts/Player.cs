@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rb;
     private Animator _anim;
     private SpriteRenderer _sr;
-    
+
+    public Hand[] hands;
     public Scanner scanner;
     public Vector2 inputVec;
     [SerializeField] public float Speed;
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
         _sr = GetComponent<SpriteRenderer>();
         _anim = GetComponent<Animator>();
         scanner = GetComponent<Scanner>();
+        hands = GetComponentsInChildren<Hand>(true);
     }
 
     void FixedUpdate()
