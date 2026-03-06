@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = System.Random;
 
 public class Reposition : MonoBehaviour
 {
@@ -18,16 +19,16 @@ public class Reposition : MonoBehaviour
         Vector3 PlayerPos = GameManager.instance.player.transform.position;
         Vector3 MyPos = transform.position;
         
-        float diffX = MathF.Abs(PlayerPos.x - MyPos.x);
-        float diffY = MathF.Abs(PlayerPos.y - MyPos.y);
-
-        Vector3 PlayerDir = GameManager.instance.player.inputVec;
-        float dirX = PlayerDir.x < 0 ? -1 : 1;
-        float dirY = PlayerDir.y < 0 ? -1 : 1;
-
         switch (transform.tag)
         {
             case "Ground":
+                float diffX = (PlayerPos.x - MyPos.x);
+                float diffY = (PlayerPos.y - MyPos.y);
+                float dirX = diffX < 0 ? -1 : 1;
+                float dirY = diffY < 0 ? -1 : 1;
+                diffX = Mathf.Abs(diffX);
+                diffY = Mathf.Abs(diffY);
+                
                 if (diffX > diffY)
                 {
                     transform.Translate(Vector3.right * dirX * 40);
@@ -40,7 +41,9 @@ public class Reposition : MonoBehaviour
             case "Enemy":
                 if (_collider2D.enabled)
                 {
-                    transform.Translate(PlayerDir * 20 + new Vector3(UnityEngine.Random.Range(-3f, 3f),UnityEngine.Random.Range(-3f, 3f), 0f));
+                    Vector3 dist = PlayerPos - MyPos;
+                    Vector3 ran = new Vector3(UnityEngine.Random.Range(-3,3), UnityEngine.Random.Range(-3,3), 0);
+                    transform.Translate(ran + dist * 2);
                 }
                 break;
         }
