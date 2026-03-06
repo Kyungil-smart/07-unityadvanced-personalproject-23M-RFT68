@@ -78,6 +78,7 @@ public class Monster : MonoBehaviour
         if (health > 0)
         {
             anim.SetTrigger("Hit");
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
         }
         else
         {
@@ -88,6 +89,9 @@ public class Monster : MonoBehaviour
             anim.SetBool("Dead", true);
             GameManager.instance.kill++;
             GameManager.instance.GetExp();
+            
+            if (GameManager.instance.isLive) // 클리어 시 몹 한번에 삭제될때 귀테러 방지용
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
         }
     }
 
