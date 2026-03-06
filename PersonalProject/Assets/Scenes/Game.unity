@@ -8270,7 +8270,7 @@ MonoBehaviour:
   hands: []
   scanner: {fileID: 0}
   inputVec: {x: 0, y: 0}
-  Speed: 5
+  Speed: 3
 --- !u!114 &843160617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18843,11 +18843,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1139833646}
   - {fileID: 1290595096}
   - {fileID: 1805969855}
   - {fileID: 1209325688}
   - {fileID: 65935323}
-  - {fileID: 1139833646}
   m_Father: {fileID: 1628588834}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -26670,8 +26670,8 @@ MonoBehaviour:
   gameTime: 0
   maxGameTime: 300
   playerID: 0
-  health: 100
-  maxHealth: 100
+  health: 50
+  maxHealth: 50
   level: 0
   kill: 0
   exp: 0
