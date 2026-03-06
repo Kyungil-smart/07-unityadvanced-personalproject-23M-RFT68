@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -37,7 +38,7 @@ public class AudioManager : MonoBehaviour
         bgmPlayer.volume = bgmVolume;
         bgmPlayer.clip = bgmClip;
         bgmEffect = Camera.main.GetComponent<AudioHighPassFilter>();
-
+            
         // 효과음 플레이어 초기화
         GameObject sfxObj = new GameObject("SfxPlayer");
         sfxObj.transform.parent = transform;
@@ -76,10 +77,9 @@ public class AudioManager : MonoBehaviour
             {
                 ranIndex = UnityEngine.Random.Range(0, 2);
             }
-
-
+            
             channelIndex = loopIndex;
-            sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
+            sfxPlayers[loopIndex].clip = sfxClips[(int)sfx + ranIndex];
             sfxPlayers[loopIndex].Play();
             break;
         }
