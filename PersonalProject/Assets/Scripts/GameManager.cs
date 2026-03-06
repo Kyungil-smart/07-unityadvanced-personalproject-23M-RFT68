@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     { 
         instance = this;
+        Application.targetFrameRate = 60;
     }
 
     public void GameStart(int id)
@@ -85,7 +86,12 @@ public class GameManager : MonoBehaviour
     
     public void GameRetry()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
+    }
+
+    public void GameQuit()
+    {
+        Application.Quit();
     }
 
     private void Update()
